@@ -1,6 +1,5 @@
 package core.jdbc;
 
-import next.dao.UserDao;
 import next.model.User;
 
 import java.sql.Connection;
