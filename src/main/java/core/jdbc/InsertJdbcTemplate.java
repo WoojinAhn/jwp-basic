@@ -10,14 +10,14 @@ import java.sql.SQLException;
 /**
  * Created by 1001192 on 2016. 7. 14..
  */
-public class InsertJdbcTemplate {
-    public void insert(User user, UserDao userDao) throws SQLException {
+public abstract class InsertJdbcTemplate {
+    public void insert(User user) throws SQLException {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
             con = ConnectionManager.getConnection();
-            String sql = userDao.createQueryForInsert();
-            pstmt = userDao.setValuesForInsert(user, con, sql);
+            String sql = createQueryForInsert();
+            pstmt = setValuesForInsert(user, con, sql);
 
             pstmt.executeUpdate();
         } finally {
@@ -30,4 +30,9 @@ public class InsertJdbcTemplate {
             }
         }
     }
+
+    public abstract PreparedStatement setValuesForInsert(User user, Connection con, String sql) throws SQLException;
+
+    public abstract String createQueryForInsert();
+
 }
