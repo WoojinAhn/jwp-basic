@@ -12,6 +12,9 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import core.jdbc.ConnectionManager;
 
+/**
+ * DB 초기화를 담당한다.
+ */
 @WebListener
 public class ContextLoaderListener implements ServletContextListener {
 	private static final Logger logger = LoggerFactory.getLogger(ContextLoaderListener.class);
@@ -22,7 +25,7 @@ public class ContextLoaderListener implements ServletContextListener {
 		populator.addScript(new ClassPathResource("jwp.sql"));
 		DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
 		
-		logger.info("Completed Load ServletContext!");
+		logger.error("Completed Load ServletContext!");
 	}
 
 	@Override

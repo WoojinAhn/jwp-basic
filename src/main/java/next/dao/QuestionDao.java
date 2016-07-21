@@ -9,6 +9,16 @@ import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
 
 public class QuestionDao {
+	public void insert(Question question) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate, countOfAnswer) VALUES (?, ?, ?, sysdate, 0)";
+		jdbcTemplate.update(sql,
+				question.getWriter(),
+				question.getTitle(),
+				question.getContents()
+				);
+	}
+
 	public List<Question> findAll() {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT questionId, writer, title, createdDate, countOfAnswer FROM QUESTIONS "
